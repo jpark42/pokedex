@@ -7,23 +7,14 @@ let pokemonList = [
 
 //defining height threshhold for what is considered big
 let heightBig = 1.9;
-for (i = 0; i < pokemonList.length; i++) {
+//creating a forEach function to reiterate over each pokemon in pokemonList
+pokemonList.forEach(function(pokemon) {
     //if height of pokemon is greater than 1.9, then it will display 'Wow, that's big!' after it lists the pokemon
-    if (pokemonList[i].height >= heightBig) {
-        document.write(`<li>${pokemonList[i].name} (height: ${pokemonList[i].height}m) - Wow, that's big!</li>`);
+    if (pokemon.height >= heightBig) {
+        document.write(`<li>${pokemon.name} (height: ${pokemon.height}m) - Wow, that's big!</li>`);
     } else {
     //for all other pokemon that are not greater than 1.9, it will normally list the pokemon as a list
-        document.write(`<li>${pokemonList[i].name} (height: ${pokemonList[i].height}m)</li>`);
+        document.write(`<li>${pokemon.name} (height: ${pokemon.height}m)</li>`);
     }
-}
+});
 
-
-/* Loop to display all objects
-let text = " ";
-let i = 0;
-for (;pokemonList[i];) {
-text = text + " " + pokemonList[i].name + " " + pokemonList[i].height;
-i++;
-}
-document.write(text)
-*/
