@@ -31,6 +31,16 @@ let pokemonRepository = (function() {
         listPokemon.appendChild(button);
         //append the <li> into the <ul>
         pokemonList.appendChild(button);
+
+        //add an event handler that calls the function showDetails(pokemon)
+        button.addEventListener('click', function(event) {
+            showDetails(pokemon);
+        })
+    }
+
+    //define a separate function showDetails() that writes the pokemon obect to the console
+    function showDetails(pokemon) {
+        console.log(pokemon);
     }
 
     //return object as new public function assigned as keys
