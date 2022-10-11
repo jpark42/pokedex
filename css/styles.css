@@ -63,7 +63,7 @@ h1 {
     text-align: center;
   }
 
-  .modal-container {
+  #modal-container {
     display: none;
 }
 
