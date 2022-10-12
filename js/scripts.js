@@ -112,7 +112,6 @@ let pokemonRepository = (function() {
         modal.appendChild(titleElement);
         modal.appendChild(pokemonImage);
         modal.appendChild(pokemonHeight);
-        modal.appendChild(pokemonTypes);
         modalContainer.appendChild(modal);
 
         modalContainer.addEventListener('click', (e) => {
