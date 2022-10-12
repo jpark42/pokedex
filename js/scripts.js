@@ -79,7 +79,6 @@ let pokemonRepository = (function() {
       //define a separate function showDetails() that uses a callback function to load details of pokemon and object to the console
       function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
-            console.log(pokemon);
             showModal(pokemon);
         });
     };
