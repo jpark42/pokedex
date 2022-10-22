@@ -4,7 +4,11 @@ let pokemonRepository = (function() {
     //API Url for pokedex with a pagination limit of 150 pokemon
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-    let modalContainer = document.querySelector('#modal-container');
+    
+    //define seperate function getAll()
+    function getAll () {
+        return pokemonList;
+    };
 
     //define seperate function addPokemon()
     function add(pokemon) {
@@ -17,26 +21,26 @@ let pokemonRepository = (function() {
           console.log("pokemon is not correct");
         }
     };
-    //define seperate function getAll()
-    function getAll () {
-        return pokemonList;
-    };
-
+    
     function addListItem(pokemon){
         //create a variable for pokemonList and selected the class we defined in html page using the querySelector function
         let pokemonList = document.querySelector(".pokemon-list");
         //create an li element using createElement function
-        let listPokemon = document.createElement("li");
+        let listItem = document.createElement("li");
         //create a button using the createElement function
         let button = document.createElement("button");
         //gave the button inner text of pokemon.name
         button.innerText = pokemon.name;
         //gave the button we created a class
-        button.classList.add("button-class");
+        button.classList.add("button");
+        button.setAttribute("data-toggle", "modal");
+        button.setAttribute("data-target", "#pokemon-modal")
+        //add group-list-item class to li elements created
+        button.classList.add("group-list-item");
         //append the button to the <li>
-        listPokemon.appendChild(button);
-        //append the <li> into the <ul>
-        pokemonList.appendChild(button);
+        listItem.appendChild(button);
+        //append the <li> into the <ul> which is pokemonList
+        pokemonList.appendChild(listItem);
 
         //add an event handler that calls the function showDetails(pokemon)
         button.addEventListener('click', function(event) {
@@ -84,65 +88,34 @@ let pokemonRepository = (function() {
     };
 
     function showModal(pokemon) {
-        modalContainer.innerHTML = '';
+        //show modal content
+        let modalBody = $(".modal-body");
+        let modalTItle = $(".modal-title");
+        let modalHeader = $(".modal-header");
+        
+        //clear content for modal
+        modalTitle.empty();
+        modalBody.empty();
 
-        let modal = document.createElement('div');
-        modal.classList.add('modal');
+        //creating element for name in modal content
+        let nameElement = $("<h1>" + pokemon.name + "</h1>");
+        //creating img in modal content
+        let imageElement = $('<img class="modal-img" style="width:50%">');
+        imageElement.attr("src", pokemon.imageUrl);
+        
+        //creating element for height in modal content
+        let heightElement = $("<p>" + "height : " + pokemon.height + "</p>");
+        //creating element for weight in modal content
+        let weightElement = $("<p>" + "weight : " + pokemon.weight + "</p>")
+        //creating element for type in modal content
+        let typesElement = $("<p>" + "types : " + pokemon.types + "</p>")
 
-        // Add modal button close
-        let closeButtonElement = document.createElement('button');
-        closeButtonElement.classList.add('modal-close');
-        closeButtonElement.innerText = 'Close';
-        closeButtonElement.addEventListener('click', hideModal);
-
-        let titleElement = document.createElement('h1');
-        titleElement.innerText = pokemon.name;
-
-        let pokemonImage = document.createElement('img');
-        pokemonImage.src = pokemon.imageUrl;
-
-        let pokemonHeight = document.createElement('p');
-        pokemonHeight.innerText = 'Height: ' + pokemon.height;
-
-        let pokemonTypes = document.createElement('p');
-        pokemonTypes = 'Types: ' + pokemon.types;
-
-        modal.appendChild(closeButtonElement);
-        modal.appendChild(titleElement);
-        modal.appendChild(pokemonImage);
-        modal.appendChild(pokemonHeight);
-        modalContainer.appendChild(modal);
-
-        modalContainer.addEventListener('click', (e) => {
-            let target = e.target;
-            if (target === modalContainer) {
-                hideModal();
-            }
-        });
-
-        modalContainer.classList.add('is-visible');
-    }
-
-    function hideModal() {
-        modalContainer.classList.remove('is-visible');
-    }
-
-    window.addEventListener('keydown', (e) => {
-        let modalContainer = document.querySelector('modal-container');
-        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-            hideModal();
-        }
-    });
-
-    modalContainer.addEventListener('click', (e) => {
-        // Since this is also triggered when clicking INSIDE the modal container,
-        // We only want to close if the user clicks directly on the overlay
-        let target = e.target;
-        if (target === modalContainer) {
-          hideModal();
-        }
-    });
-
+        modalTitle.append(nameElement);
+        modalBody.append(imageElement);
+        modalBody.append(heightElement);
+        modalBody.append(weightElement);
+        modalBody.append(typesElement);
+    }    
 
     //return object as new public function assigned as keys
     return {
