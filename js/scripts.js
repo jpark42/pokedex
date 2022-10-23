@@ -33,6 +33,8 @@ let pokemonRepository = (function() {
         button.innerText = pokemon.name;
         //gave the button we created a class
         button.classList.add("button");
+        button.classList.add("btn");
+        button.classList.add("btn-primary");
         button.setAttribute("data-toggle", "modal");
         button.setAttribute("data-target", "#pokemon-modal")
         //add group-list-item class to li elements created
@@ -73,9 +75,11 @@ let pokemonRepository = (function() {
             return response.json();
         }).then(function (details) {
         //added details to the item
+        //console.log pokemon types
         pokemon.imageUrl = details.sprites.front_default;
-        pokemon.height = details.height;
-        pokemon.types = details.types;
+        pokemon.height = details.height; // 10
+        pokemon.types = details.types; // { }
+        pokemon.weight = details.weight;
         }).catch(function (e) {
             console.error(e);
         });
@@ -90,7 +94,7 @@ let pokemonRepository = (function() {
     function showModal(pokemon) {
         //show modal content
         let modalBody = $(".modal-body");
-        let modalTItle = $(".modal-title");
+        let modalTitle = $(".modal-title");
         let modalHeader = $(".modal-header");
         
         //clear content for modal
@@ -124,6 +128,7 @@ let pokemonRepository = (function() {
         addListItem: addListItem,
         loadList: loadList,
         loadDetails: loadDetails,
+        showModal: showModal,
     };
 }) ();    
 
