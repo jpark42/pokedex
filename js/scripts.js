@@ -78,7 +78,10 @@ let pokemonRepository = (function() {
         //console.log pokemon types
         pokemon.imageUrl = details.sprites.front_default;
         pokemon.height = details.height; // 10
-        pokemon.types = details.types; // { }
+        pokemon.types = [];
+        for (var i = 0; i < details.types.length; i++) {
+          pokemon.types.push(details.types[i].type.name);
+        };
         pokemon.weight = details.weight;
         }).catch(function (e) {
             console.error(e);
