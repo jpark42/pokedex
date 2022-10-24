@@ -75,8 +75,8 @@ let pokemonRepository = (function() {
             return response.json();
         }).then(function (details) {
         //added details to the item
-        //console.log pokemon types
         pokemon.imageUrl = details.sprites.front_default;
+        pokemon.imageUrlBack = details.sprites.back_default;
         pokemon.height = details.height; // 10
         pokemon.types = [];
         for (var i = 0; i < details.types.length; i++) {
@@ -109,6 +109,8 @@ let pokemonRepository = (function() {
         //creating img in modal content
         let imageElement = $('<img class="modal-img" style="width:50%">');
         imageElement.attr("src", pokemon.imageUrl);
+        let imageElementBack = $('<img class="modal-img" style="width:50%">');
+        imageElementBack.attr("src", pokemon.imageUrlBack);
         
         //creating element for height in modal content
         let heightElement = $("<p>" + "height : " + pokemon.height + "</p>");
@@ -119,6 +121,7 @@ let pokemonRepository = (function() {
 
         modalTitle.append(nameElement);
         modalBody.append(imageElement);
+        modalBody.append(imageElementBack);
         modalBody.append(heightElement);
         modalBody.append(weightElement);
         modalBody.append(typesElement);
