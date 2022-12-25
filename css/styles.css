@@ -59,7 +59,7 @@ li {
     list-style: none;
 }
 
-.pokemon-list>li {
+.pokemon-list li {
     flex: 0 0 30%;
     text-align: center;
     margin: 3px 1%;
@@ -78,3 +78,5 @@ li {
 @media all and (max-width: 500px) {}
 
 @media all and (min-width: 500px) and (max-width: 750px){}
+
+/*Need to format pokemon list items in a way so that they are not just in one list that scrolls down. Make it more easy for the reader to view without scrolling
